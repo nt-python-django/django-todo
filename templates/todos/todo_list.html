@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}My Todos{% endblock %}
+
+{% block content %}
+<h2>My Todos</h2>
+
+<a href="{% url 'todo_create' %}">➕ Add Todo</a>
+
+<ul>
+{% for todo in todos %}
+    <li>
+        {% if todo.is_completed %}
+            ✅ <del>{{ todo.title }}</del>
+        {% else %}
+            ⏳ {{ todo.title }}
+        {% endif %}
+
+        <a href="{% url 'todo_update' todo.id %}">Edit</a>
+        <a href="{% url 'todo_delete' todo.id %}">Delete</a>
+    </li>
+{% empty %}
+    <li>Todo yo‘q</li>
+{% endfor %}
+</ul>
+{% endblock %}
